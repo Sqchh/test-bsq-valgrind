@@ -16,10 +16,7 @@
 
 int main(int ac, char **av)
 {
-    struct stat s;
-    char *src;
-    int fd;
-    int fd_read = 0;
+    struct stat *s = malloc(sizeof(struct stat));
 
     if (ac != 2) {
         write(1, "error\n", 7);
@@ -27,17 +24,10 @@ int main(int ac, char **av)
     }
     else
     {
-        stat(av[1], &s);
-        src = malloc(sizeof(char) * (s.st_size + 1));
-        fd = open(av[1], O_RDONLY);
-        fd_read = read(fd, src, s.st_size);
-        src[fd_read] = '\0';
-        my_putstr(src);
-        free(src);
-        close(fd);
         ouvrir_t *ouvrir2;
         ouvrir2 = ouvrir();
         ouvrir2->strV2 = todouble_point(ouvrir2);
+        open_file(av, ouvrir2, s);
         /*ouvrir2->tab = nb_line(ouvrir2);
         for (int i = 0; ouvrir2->tab[i]; i++) {
             for (int j = 0; ouvrir2->tab[i][j]; j++)

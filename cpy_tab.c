@@ -2,36 +2,46 @@
 ** EPITECH PROJECT, 2021
 ** cpy_tab.c
 ** File description:
-** cpy_tab
+** cpy tab
 */
 
-#include "./include/bsq.h"
-#include <stdlib.h>
+#include "include/my.h"
 
-int **nb_line(ouvrir_t *ouvrir)
+char **cpy_tab(ouvrir_t *tab)
 {
+    int a = 0;
+    int b = 0;
     int count = 0;
-    int counter = 0;
-    int x = 0;
 
-    for (int i = 0; ouvrir->strV2[i] != NULL; i++)
-        count++;
-    ouvrir->tab = malloc(sizeof(int *)*(count));
-    for (int i = 1; ouvrir->strV2[i] != NULL; i++) {
-        for (int j = 0; ouvrir->strV2[i][j] != '\0'; j++)
-            counter++;
-        ouvrir->tab[x] = malloc(sizeof(int)*(counter));
-        counter = 0;
-        x++;
-    }
-    x = 0;
-    for (int i = 1; ouvrir->strV2[i] != NULL; i++)
-        for (int j = 0; ouvrir->strV2[i][j] != '\0'; j++) {
-            if (ouvrir->strV2[i][j] == '.')
-                ouvrir->tab[x][j] = 1;
-            if (ouvrir->strV2[i][j] == 'o')
-                ouvrir->tab[x][j] = 0;
+    for (int i = 0; tab->str[i] != '\0'; i++)
+        if (tab->str[i] == '\n')
+            count++;
+    tab->str2 = malloc(sizeof(char *)*(count + 2));
+
+    for (int i = 0; tab->str[i] != '\0'; i++) {
+        if (tab->str[i] == '\n') {
+            tab->str2[b] = malloc(sizeof(char)*(a + 1));
+            b++;
+            a = -1;
         }
-        x++;
-    return (ouvrir->tab);
+        if (tab->str[i + 1] == '\0') {
+            a++;
+            tab->str2[b] = malloc(sizeof(char)*(a + 1));
+        }
+        a++;
+    }
+    a = 0;
+    b = 0;
+    for (int i = 0; tab->str[i] != '\0'; i++) {
+        if (tab->str[i] == '\n')
+            tab->str2[a][b] = '\0';
+            a++;
+            b = 0;
+            i++;
+        tab->str2[a][b] = tab->str[i];
+        b++;
+    }
+    tab->str2[a][b] = '\0';
+    tab->str2[a + 1] = NULL;
+    return (tab->str2);
 }

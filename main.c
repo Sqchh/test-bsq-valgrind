@@ -1,37 +1,35 @@
 /*
-** EPITECH PROJECT, 2020
+** EPITECH PROJECT, 2021
 ** main.c
 ** File description:
-** bsq_main
+** main
 */
 
-#include <unistd.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include "include/bsq.h"
+#include <ncurses.h>
+#include "include/my.h"
 
 int main(int ac, char **av)
 {
+    int ch = 0;
     struct stat *s = malloc(sizeof(struct stat));
-
+    ouvrir_t *sokoban;
+    sokoban = ouvrir();
+    sokoban->str2 = cpy_tab(sokoban);
     if (ac != 2) {
-        write(1, "error\n", 7);
+        write(2, "too many arguments", 19);
         return (84);
     }
-    else
-    {
-        ouvrir_t *ouvrir2;
-        ouvrir2 = ouvrir();
-        ouvrir2->strV2 = todouble_point(ouvrir2);
-        open_file(av, ouvrir2, s);
-        /*ouvrir2->tab = nb_line(ouvrir2);
-        for (int i = 0; ouvrir2->tab[i]; i++) {
-            for (int j = 0; ouvrir2->tab[i][j]; j++)
-                printf("%d", ouvrir2->tab[i][j]);
-        }*/
+    open_file(av, sokoban, s);
+    initscr();
+    keypad(stdscr, TRUE);
+    curs_set(FALSE);
+    while (ch != KEY_F(2)) {
+        clear();
+        for (int i = 0; sokoban->str2[i] != NULL; i++)
+            printw("%s", sokoban->str2[i]);
+        refresh();
+        ch = getch();
     }
+    endwin();
+    return (0);
 }

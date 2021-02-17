@@ -8,23 +8,24 @@
 SRC     =		my_putchar.c \
 			my_putstr.c \
 			main.c 	\
-			todouble.c 	\
-			cpy_tab.c 	\
-			struct.c 	\
 			open.c 	\
+			struct.c 	\
+			cpy_tab.c 	\
 
 INC =   -include ./include/my.h
 
 CFLAGS  =   -Wall -Wextra -g
 
+NCURSE	=	-lncurses
+
 OBJ =   $(SRC:.c=.o)
 
-NAME    =   BSQ
+NAME    =   my_sokoban
 
 all:    $(NAME)
 
 $(NAME):    $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(INC)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(INC) $(NCURSE)
 
 clean:
 	rm -f $(OBJ)

@@ -15,16 +15,17 @@
 
 typedef struct ouvrir
 {
-    char *str;
-    char **strV2;
-    int **tab;
     int fd;
     int fd_read;
+    char *str;
+    char **str2;
+    char **str3;
 }ouvrir_t;
 
 int my_putstr(char const *str);
 void my_putchar(char c);
-ouvrir_t *ouvrir(void);
-char **todouble_point(ouvrir_t *op);
-int **nb_line(ouvrir_t *ouvrir);
+void pop_up(char **av);
+int my_strlen(char const *str);
 void open_file(char **av, ouvrir_t *openV2, struct stat *s);
+ouvrir_t *ouvrir(void);
+char **cpy_tab(ouvrir_t *tab);

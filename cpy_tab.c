@@ -13,9 +13,10 @@ char **cpy_tab(ouvrir_t *tab)
     int b = 0;
     int count = 0;
 
-    for (int i = 0; tab->str[i] != '\0'; i++)
+    for (int i = 0; tab->str[i] != '\0'; i++) {
         if (tab->str[i] == '\n')
             count++;
+    }
     tab->str2 = malloc(sizeof(char *)*(count + 2));
 
     for (int i = 0; tab->str[i] != '\0'; i++) {
@@ -33,11 +34,12 @@ char **cpy_tab(ouvrir_t *tab)
     a = 0;
     b = 0;
     for (int i = 0; tab->str[i] != '\0'; i++) {
-        if (tab->str[i] == '\n')
+        if (tab->str[i] == '\n') {
             tab->str2[a][b] = '\0';
             a++;
             b = 0;
             i++;
+        }
         tab->str2[a][b] = tab->str[i];
         b++;
     }

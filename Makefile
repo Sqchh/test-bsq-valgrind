@@ -11,6 +11,8 @@ SRC     =		my_putchar.c \
 			open.c 	\
 			struct.c 	\
 			cpy_tab.c 	\
+			rep_tab.c 	\
+			moov_p.c 	\
 
 INC =   -include ./include/my.h
 
